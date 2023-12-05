@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "tittle": {
+    "title": {
       "type": "string",
       "required": true
     },
@@ -30,8 +30,8 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "tittle",
-      "required": true
+      "required": true,
+      "targetField": "title"
     },
     "summary": {
       "type": "text",

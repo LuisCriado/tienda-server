@@ -719,6 +719,37 @@ export interface ApiAddressAddress extends Schema.CollectionType {
   };
 }
 
+export interface ApiBannerBanner extends Schema.CollectionType {
+  collectionName: 'banners';
+  info: {
+    singularName: 'banner';
+    pluralName: 'banners';
+    displayName: 'Banner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String;
+    banner: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Schema.CollectionType {
   collectionName: 'orders';
   info: {
@@ -804,7 +835,7 @@ export interface ApiProductoProducto extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    tittle: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
     platform: Attribute.Relation<
       'api::producto.producto',
       'oneToOne',
@@ -812,8 +843,7 @@ export interface ApiProductoProducto extends Schema.CollectionType {
     >;
     price: Attribute.Decimal & Attribute.Required;
     discount: Attribute.Integer;
-    slug: Attribute.UID<'api::producto.producto', 'tittle'> &
-      Attribute.Required;
+    slug: Attribute.UID<'api::producto.producto', 'title'> & Attribute.Required;
     summary: Attribute.Text & Attribute.Required;
     video: Attribute.String & Attribute.Required;
     cover: Attribute.Media & Attribute.Required;
@@ -894,6 +924,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::address.address': ApiAddressAddress;
+      'api::banner.banner': ApiBannerBanner;
       'api::order.order': ApiOrderOrder;
       'api::platform.platform': ApiPlatformPlatform;
       'api::producto.producto': ApiProductoProducto;
